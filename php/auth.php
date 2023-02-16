@@ -7,6 +7,7 @@
      * Copyright 2004 by Robert LeBlanc <rjl@renaissoft.com>
      *                   David Morton   <mortonda@dgrmm.net>
      * All rights reserved.
+     * History 2023 PHP8.1 port by Joel Rodriguez <joel@tahoestores.com>
      *
      * PREAMBLE
      *
@@ -79,6 +80,12 @@
     require_once ("mailtools.php");
     require_once ("maia_db.php");
 
+    /* use PHPMailer SKIMP imap not added/tested */
+    require_once ("POP3.php");
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPMailer\POP3;
+
 
     /* Authenticate with external program declared as  $auth_external
      * in config.php
@@ -117,8 +124,8 @@
           $auth_pop3_port = 110;
         }
         
-
-        require_once ("Net/POP3.php");
+	/* deprecate unsupported pear stuff */
+        /* require_once ("Net/POP3.php"); */
         $mbox = new Net_POP3();
         
         $result = $mbox->connect($auth_pop3_host, $auth_pop3_port);
