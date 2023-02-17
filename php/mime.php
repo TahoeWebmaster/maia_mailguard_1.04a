@@ -78,8 +78,9 @@
    require_once ("maia_db.php");
    require_once ("Mail/mimeDecode.php");  // PEAR::Mail::mimeDecode.php
    // edit jjs 2020-03-26
-   // require_once 'HTMLPurifier.auto.php';
-   require_once ("/var/htmlpurifier/library/HTMLPurifier.auto.php");
+   //  back out edit, path platform dependent jfr 02/16/2023
+   require_once 'HTMLPurifier.auto.php';
+   //require_once ("/var/htmlpurifier/library/HTMLPurifier.auto.php");
 
 
    /*
@@ -103,12 +104,13 @@
       switch ($primary) {
 
          case "multipart":
-            if (!array_key_exists('parts', $structure)) {
+	    /* function requires array, caste to array */
+            /* if (!array_key_exists('parts', $structure)) { */
+	    if (!array_key_exists('parts', (array)$structure)) {
                   $ret = "[" . $lang['text_invalid'] . "]<br>";
                   break;
             }
             // Recursively decode each of the sub-parts of this
-            // part in turn.
             foreach ($structure->parts as $part) {
                $messagepart .= display_parts($part);
 
