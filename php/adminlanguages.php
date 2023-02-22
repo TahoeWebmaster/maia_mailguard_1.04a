@@ -106,7 +106,8 @@
               "WHERE installed = 'Y' " .
               "ORDER BY language_name ASC");
     $res = $sth->execute();
-    if (PEAR::isError($sth)) { 
+    // if (PEAR::isError($sth)) { 
+    if ((new PEAR)->isError($sth)) {
         die($sth->getMessage()); 
     } 
     $smarty->assign('rowcount', $res->numrows());
@@ -150,7 +151,8 @@
                   "WHERE installed = 'N' AND abbreviation IN (" . implode(',', $phlist) . ") " .
                   "ORDER BY language_name ASC");
         $res = $sth->execute(array_keys($dirlist));
-        if (PEAR::isError($sth)) { 
+        // if (PEAR::isError($sth)) { 
+        if ((new PEAR)->isError($sth)) {
             die($sth->getMessage()); 
         } 
         while ($row = $res->fetchrow()) {
@@ -166,7 +168,8 @@
                   "WHERE installed = 'Y' AND abbreviation IN (" . implode(',', $phlist) . ") " .
                   "ORDER BY language_name ASC");
         $res = $sth->execute(array_keys($dirlist));
-        if (PEAR::isError($sth)) { 
+        // if (PEAR::isError($sth)) { 
+        if ((new PEAR)->isError($sth)) {
             die($sth->getMessage()); 
         } 
 
